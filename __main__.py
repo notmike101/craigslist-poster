@@ -37,7 +37,7 @@ class craigslistBot:
         self.waitTime      = waitTime
 
     def __del__(self):
-        #self.client.quit()
+        self.client.quit()
         return 0
 
     def login(self):
