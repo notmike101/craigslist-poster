@@ -20,7 +20,7 @@
 
 ### Who do I talk to? ###
 
-Contact @notmike101 for any questions or concerns.
+Contact @IRDeNial for any questions or concerns.
 
 ### Contributors ###
-* @notmike101 (Michael Orozco) - Developer
+* @IRDeNial (Michael Orozco) - Developer
