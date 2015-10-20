@@ -25,6 +25,12 @@ class craigslistBot:
         print (" [LOG] {BOT} - %s" % inString.encode('utf-8').strip())
 
     def __init__(self, loginEmail = "", loginPass = "", contactNumber = "", contactName = "", postTitle = "", postCode = "", postContentFile = "", waitTime = 10):
+        display = ""
+
+        if not os.name == 'nt':
+            display = Display(visible=0,size=(800,600))
+            display.start()
+
         self.client        = webdriver.Firefox()
         self.isLoggedIn    = False
         self.loginEmail    = loginEmail
@@ -37,6 +43,9 @@ class craigslistBot:
         self.waitTime      = waitTime
 
     def __del__(self):
+        if not os.name == 'nt':
+            display.stop()
+
         self.client.quit()
         return 0
 

@@ -7,8 +7,9 @@
 
 * BeautifulSoup4
 * Selenium
+* FireFox (Should be included with Selenium)
+* PyVirtualDisplay
 * Python 2.7
-* FireFox
 
 ### Contribution guidelines ###
 
