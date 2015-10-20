@@ -20,6 +20,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 
+from pyvirtualdisplay import Display
+
 class craigslistBot:
     def debug(self, inString):
         print (" [LOG] {BOT} - %s" % inString.encode('utf-8').strip())
