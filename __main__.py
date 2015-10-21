@@ -106,7 +106,7 @@ class craigslistBot:
         self.client.find_element_by_css_selector("#contact_name").send_keys(self.contactName)
         time.sleep(self.waitTime)
         self.debug("Filling in post title")
-        self.client.find_element_by_css_selector("#PostingTitle").send_keys(self.postTitle)
+        self.client.find_element_by_css_selector("#PostingTitle").send_keys(spintax.parse(self.postTitle))
         time.sleep(self.waitTime)
         self.debug("Filling in zip code")
         self.client.find_element_by_css_selector("#postal_code").send_keys(self.postCode)
