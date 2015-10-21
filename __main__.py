@@ -21,6 +21,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 
 from pyvirtualdisplay import Display
+import spintax
 
 class craigslistBot:
     def debug(self, inString):
@@ -116,8 +117,11 @@ class craigslistBot:
         content = f.read()
         f.close()
 
+        self.debug("Spinning content")
+        spinContent = spintax.parse(content)
+
         self.debug("Filling in post content")
-        self.client.find_element_by_css_selector("#PostingBody").send_keys(content)
+        self.client.find_element_by_css_selector("#PostingBody").send_keys(spinContent)
         time.sleep(self.waitTime)
         self.debug("Checking 'Okay to contact for other offers'")
         self.client.find_element_by_css_selector("#oc").click()
@@ -139,6 +143,7 @@ class craigslistBot:
         time.sleep(self.waitTime)
         self.debug("Clicking publish")
         self.client.find_element_by_css_selector('.draft_warning button[value="Continue"]').click()
+        time.sleep(10)
 
 def main(loginEmail,loginPass,contactNumber,contactName,postTitle,postCode,postContentFile,waitTime):
     startExecTime = time.time()
