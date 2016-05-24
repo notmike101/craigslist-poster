@@ -6,8 +6,8 @@
 # End dev: 10/17/2015 1:45am
 
 import sys, argparse, string, ctypes, os, re
-import urllib, urllib2, cookielib, httplib
-import cookielib, time, base64
+import urllib.request, urllib.parse, urllib.error, urllib.request, urllib.error, urllib.parse, http.cookiejar, http.client
+import http.cookiejar, time, base64
 
 from os import path
 from bs4 import BeautifulSoup
@@ -25,7 +25,7 @@ import spintax
 
 class craigslistBot:
     def debug(self, inString):
-        print (" [LOG] {BOT} - %s" % inString.encode('utf-8').strip())
+        print((" [LOG] {BOT} - %s" % inString.encode('utf-8').strip()))
 
     def __init__(self, loginEmail = "", loginPass = "", contactNumber = "", contactName = "", postTitle = "", postCode = "", postContentFile = "", waitTime = 10):
         self.display = ""
@@ -73,26 +73,13 @@ class craigslistBot:
             return 0
 
         self.debug("Navigating to post page")
-        self.client.get("http://losangeles.craigslist.org/search/sgv/cps")
-        self.client.find_element_by_css_selector(".post a.no-mobile").click()
+        self.client.get("http://orlando.craigslist.org/search/fua")
+        self.client.find_element_by_link_text("post").click()
         time.sleep(self.waitTime)
-        self.client.find_element_by_css_selector("input[value='so']").click()
+        self.client.find_element_by_css_selector("input[value='fso']").click()
         time.sleep(self.waitTime)
-        self.client.find_element_by_css_selector("input[value='76']").click()
+        self.client.find_element_by_css_selector("input[value='141']").click()
         time.sleep(self.waitTime)
-        self.client.find_element_by_css_selector("input[value='4']").click()
-        time.sleep(self.waitTime)
-
-        self.debug("Trying to fill in email")
-        try:
-            self.client.find_element_by_css_selector('#FromEMail').send_keys(self.loginEmail)
-        except NoSuchElementException:
-            self.debug("Not avaliable")
-        try:
-            self.client.find_element_by_css_selector('#FromEMail').send_keys(self.loginEmail)
-        except NoSuchElementException:
-            self.debug("Not avaliable")
-
         self.debug("Checking 'Okay to contact by phone'")
         self.client.find_element_by_css_selector("#contact_phone_ok").click()
         time.sleep(self.waitTime)
@@ -113,16 +100,14 @@ class craigslistBot:
         time.sleep(self.waitTime)
 
         self.debug("Getting post content")
-        f = open(self.postContent, "rb")
+        f = open(self.postContent, "r")
         content = f.read()
         f.close()
-
-        self.debug("Spinning content")
-        spinContent = spintax.parse(content)
-
+        
         self.debug("Filling in post content")
-        self.client.find_element_by_css_selector("#PostingBody").send_keys(spinContent)
+        self.client.find_element_by_css_selector("#PostingBody").send_keys(content)
         time.sleep(self.waitTime)
+        self.client.find_element_by_xpath("//select[@name='condition']/option[text()='excellent']").click()
         self.debug("Checking 'Okay to contact for other offers'")
         self.client.find_element_by_css_selector("#oc").click()
         time.sleep(self.waitTime)
