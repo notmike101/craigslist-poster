@@ -1,5 +1,7 @@
 # README #
 
+## THIS IS NO LONGER MAINTAINED, BUT I AM OPEN TO MERGING PULL REQUESTS FOR NEW FEATURES ##
+
 ### What this does ###
 
 This python script was created to automate the process of posting craigslist ads while emulating a real user via the Selenium browser engine.  It has the ability to spin content in the post title and post body to allow for completely dynamic ads.
